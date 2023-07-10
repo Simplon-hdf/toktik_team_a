@@ -38,17 +38,21 @@ Basic Tiktok clone
 ### Install
 
 ```bash
-[commands]
+conda create --name toktik
+conda activate toktik
+conda install python=3.10 pip
+pip install uvicorn fastapi SQLAlchemy
 ```
 
 
 
 <br>
 
-### Run
+### Run [http://localhost:8000/](http://localhost:8000/)
 
 ```bash
-[commands]
+conda activate toktik
+uvicorn api.main:app --reload
 ```
 
 
