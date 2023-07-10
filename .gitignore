@@ -160,4 +160,4 @@ cython_debug/
 #.idea/
 
 .vscode
-api/src/config.py
+api/config.py
