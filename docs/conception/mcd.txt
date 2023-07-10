@@ -1,0 +1,32 @@
+@startuml
+
+Class user {
+  Int id
+  String username
+  String password
+  String email
+  String token
+}
+
+Class post {
+  Int id
+  String title
+  String video_url
+  String description
+  Int author_id
+  List comments
+}
+
+Class comment {
+  Int id
+  String content
+  Int user_id
+  Int post_id
+}
+
+user "1,1" --- "0,n" post
+user "1,1" --- "0,n" comment
+comment "1,1" -- "0,n"  post
+
+
+@enduml
