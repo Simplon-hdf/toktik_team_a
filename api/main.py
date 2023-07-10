@@ -1,8 +1,31 @@
+from fastapi import Depends, FastAPI, HTTPException
+from sqlalchemy.orm import Session
 from typing import Union
 
-from fastapi import FastAPI
+# from . import crud, models, schemas
+from .database.database import SessionLocal, engine
 
+
+
+# Create all schemas on startup
+# schemas.Base.metadata.create_all(bind=engine)
+
+# Declare the app
 app = FastAPI()
+
+
+
+# DB session handling
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+
+
+
+
 
 @app.get("/")
 def read_root():
