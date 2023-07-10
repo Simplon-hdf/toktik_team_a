@@ -63,28 +63,72 @@ uvicorn api.main:app --reload
 
 <br>
 
-> **User**
+> **Post**
 
 <details>
  <summary>
-  <code>POST</code>
-  <code><b>/login</b></code>
-  <code>(login with username & password, and get back an auth token)</code>
+  <code>GET</code>
+  <code><b>/post/:id</b></code>
+  <code>(get 1 Post)</code>
  </summary>
 
 ##### Parameters
 
-> | name      |  type     | data type               | description                                                           |
-> |-----------|-----------|-------------------------|-----------------------------------------------------------------------|
-> | name      |  required | string                  | username                                                              |
-> | password  |  required | string                  | password                                                              |
+> | name      |  type     | data type               | description                                                      |
+> |-----------|-----------|-------------------------|------------------------------------------------------------------|
+> | id        |  required | int                     | post_id                                                          |
 
 ##### Responses
 
-> | http code     | content-type                      | response                                                            |
-> |---------------|-----------------------------------|---------------------------------------------------------------------|
-> | `200`         | `application/json`                | ` `                                                                 |
-> | `404`        | `application/json`                | ` `
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | Post                                                           |
+> | `404`         | `application/json`                | Post does not exist                                            |
+
+</details>
+
+<details>
+ <summary>
+  <code>GET</code>
+  <code><b>/post/list</b></code>
+  <code>(get all Posts)</code>
+ </summary>
+
+##### Parameters
+
+> | name      |  type     | data type               | description                                                      |
+> |-----------|-----------|-------------------------|------------------------------------------------------------------|
+
+##### Responses
+
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | `Post`                                                         |
+> | `404`         | `application/json`                | Post does not exist                                            |
+
+</details>
+
+<details>
+ <summary>
+  <code>POST</code>
+  <code><b>/post/create</b></code>
+  <code>(create a new Post)</code>
+ </summary>
+
+##### Parameters
+
+> | name        |  type     | data type               | description                                                      |
+> |-------------|-----------|-------------------------|------------------------------------------------------------------|
+> | title       | required  | str                     | Title of Post                                                    |
+> | description | optional  | str                     | Description of Post                                              |
+> | video_url   | required  | str                     | URL of embedded video                                            |
+> | user_id     | required  | int                     | ID of author                                                     |
+
+##### Responses
+
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | `Post`                                                         |
 
 </details>
 
