@@ -5,7 +5,7 @@ from pydantic import BaseModel
 
 
 class PostBase(BaseModel):
-    title: Optional[str] = None
+    title: str
     description: Optional[str] = None
 
 class PostCreate(PostBase):
