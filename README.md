@@ -117,18 +117,62 @@ uvicorn api.main:app --reload
 
 ##### Parameters
 
-> | name        |  type     | data type               | description                                                      |
-> |-------------|-----------|-------------------------|------------------------------------------------------------------|
-> | title       | required  | str                     | Title of Post                                                    |
-> | description | optional  | str                     | Description of Post                                              |
-> | video_url   | required  | str                     | URL of embedded video                                            |
-> | user_id     | required  | int                     | ID of author                                                     |
+> | name        |  type     | data type               | description                                                    |
+> |-------------|-----------|-------------------------|----------------------------------------------------------------|
+> | title       | required  | str                     | Title of Post                                                  |
+> | description | optional  | str                     | Description of Post                                            |
+> | video_url   | required  | str                     | URL of embedded video                                          |
+> | user_id     | required  | int                     | ID of author                                                   |
 
 ##### Responses
 
 > | http code     | content-type                      | response                                                       |
 > |---------------|-----------------------------------|----------------------------------------------------------------|
 > | `200`         | `application/json`                | `Post`                                                         |
+
+</details>
+
+<details>
+ <summary>
+  <code>DELETE</code>
+  <code><b>/post/delete/:id</b></code>
+  <code>(Delete a Post)</code>
+ </summary>
+
+##### Parameters
+
+> | name        |  type     | data type               | description                                                    |
+> |-------------|-----------|-------------------------|----------------------------------------------------------------|
+
+##### Responses
+
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | `Post`                                                         |
+> | `404`         | `application/json`                | Post does not exist                                            |
+
+</details>
+
+<details>
+ <summary>
+  <code>PATCH</code>
+  <code><b>/post/update/:id</b></code>
+  <code>(Partially update an existing Post)</code>
+ </summary>
+
+##### Parameters
+
+> | name        |  type     | data type               | description                                                    |
+> |-------------|-----------|-------------------------|----------------------------------------------------------------|
+> | title       | optional  | str                     | Title of Post                                                  |
+> | description | optional  | str                     | Description of Post                                            |
+
+##### Responses
+
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | `Post`                                                         |
+> | `404`         | `application/json`                | Post does not exist                                            |
 
 </details>
 
