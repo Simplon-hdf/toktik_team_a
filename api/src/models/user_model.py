@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String
-from config import Base
+from api.config import Base
 from sqlalchemy.orm import relationship, Mapped, mapped_column
-from models.comment_model import Comment
+from api.src.models.comment_model import Comment
 from models.post_model import Post
 
 class User(Base):

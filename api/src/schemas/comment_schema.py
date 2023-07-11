@@ -22,4 +22,4 @@ class Comment(CommentBase):
     class Config:
         orm_mode = True
 
-Comment.model_rebuild()
+#Comment.model_rebuild()

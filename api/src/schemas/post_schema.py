@@ -25,4 +25,4 @@ class Post(PostBase):
     class Config:
         orm_mode = True
 
-Post.model_rebuild()
+#Post.model_rebuild()
