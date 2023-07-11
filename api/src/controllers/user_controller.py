@@ -11,6 +11,10 @@ class UserController :
     @staticmethod
     def get_user_by_token(db: Session, token: str) -> User :
         return db.query(User).filter(User.token == token).first()
+    
+    @staticmethod
+    def get_users(db: Session) -> list [User] :
+        return db.query(User).all()
 
     @staticmethod
     def is_password(password: str, user:User) -> bool: 
