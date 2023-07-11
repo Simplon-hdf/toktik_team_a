@@ -3,12 +3,10 @@ from typing import Optional
 from pydantic import BaseModel
 from typing import ForwardRef
 
-
 Comment = ForwardRef('Comment')
 
 class PostBase(BaseModel):
     description:  Optional[str] = None
-
 
 class PostCreate(PostBase):
     title: str

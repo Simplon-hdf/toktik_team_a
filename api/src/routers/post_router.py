@@ -5,8 +5,6 @@ from ..controllers.post_controller import PostController
 from ...config import get_db
 from ...main import app
 
-
-
 @app.post("/create", response_model=Post)
 def post_create(tag: PostCreate, db: Session = Depends(get_db)):
     return PostController.post_create(db=db, tag=tag)

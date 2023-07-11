@@ -3,7 +3,6 @@ from config import Base
 from models.user_model import User
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-
 class Post(Base):
     __tablename__ = 'posts'
 

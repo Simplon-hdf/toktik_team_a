@@ -2,8 +2,6 @@ from sqlalchemy.orm import Session
 from ..schemas.comment_schema import Comment, CommentCreate, CommentPatch
 from ..utils.controller_utils import patch_entity
 
-
-
 class CommentController:
 
     @staticmethod

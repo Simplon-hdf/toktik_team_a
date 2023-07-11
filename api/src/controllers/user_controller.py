@@ -5,7 +5,6 @@ import jwt, re
 from config import SECURE_KEY
 from datetime import datetime, timezone
 
-
 class UserController :
 
     @staticmethod

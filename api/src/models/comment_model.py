@@ -4,7 +4,6 @@ from config import Base
 from models.post_model import Post
 from.user_model import User
 
-
 class Comment(Base):
     __tablename__ = 'comments'
 

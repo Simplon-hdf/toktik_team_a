@@ -4,7 +4,6 @@ from sqlalchemy.orm import relationship, Mapped, mapped_column
 from models.comment_model import Comment
 from models.post_model import Post
 
-
 class User(Base):
     __tablename__ = 'users'
 
