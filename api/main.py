@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from config import engine
+from .config import engine
 
 #router imports
 import src.routers.comment_router as comment_router
