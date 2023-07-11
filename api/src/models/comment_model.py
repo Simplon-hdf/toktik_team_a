@@ -1,9 +1,8 @@
 from sqlalchemy import Column, ForeignKey, String, Integer
 from sqlalchemy.orm import relationship, Mapped, mapped_column
-from config import Base
-from models.post_model import Post
-from.user_model import User
-
+from api.config import Base
+from api.src.models.post_model import Post
+from user_model import User
 
 class Comment(Base):
     __tablename__ = 'comments'

@@ -1,10 +1,10 @@
 from sqlalchemy.orm import Session
 from models.user_model import User
+# from api.src.models.user_model import User
 from schemas.user_schemas import Hasher, UserSchema
 import jwt, re
 from config import SECURE_KEY
 from datetime import datetime, timezone
-
 
 class UserController :
 

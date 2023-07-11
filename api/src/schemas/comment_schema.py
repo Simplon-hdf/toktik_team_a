@@ -12,7 +12,6 @@ class CommentCreate(CommentBase):
     post_id: int
 
 class CommentPatch(CommentBase):
-    id: int
     content: Optional[str] = None
 
 class Comment(CommentBase):
@@ -23,4 +22,4 @@ class Comment(CommentBase):
     class Config:
         orm_mode = True
 
-Comment.model_rebuild()
+#Comment.model_rebuild()

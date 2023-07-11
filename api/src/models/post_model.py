@@ -1,8 +1,7 @@
 from sqlalchemy import Column, String, ForeignKey
-from config import Base
-from models.user_model import User
+from api.config import Base
+from api.src.models.user_model import User
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-
 
 class Post(Base):
     __tablename__ = 'posts'

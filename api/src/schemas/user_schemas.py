@@ -40,4 +40,4 @@ class UserSchema(UserBase):
     class Config:
         orm_mode = True
 
-UserSchema.model_rebuild()
+#UserSchema.model_rebuild()

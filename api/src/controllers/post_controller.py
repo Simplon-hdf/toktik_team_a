@@ -2,8 +2,6 @@ from sqlalchemy.orm import Session
 from ..schemas.post_schema import Post, PostCreate, PostPatch
 from ..utils.controller_utils import patch_entity
 
-
-
 class PostController:
 
     @staticmethod
