@@ -1,11 +1,20 @@
-from typing import List, Generic, TypeVar
-from pydantic import BaseModel, Field
-from pydantic.generics import GenericModel
+# from typing import TypeVar
+from pydantic import BaseModel
 from passlib.context import CryptContext
+from typing import ForwardRef
 
-T = TypeVar('T')
 
+# T = TypeVar('T')
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+Comment = ForwardRef('Comment')
+Post = ForwardRef('Post')
+
+class UserBase(BaseModel):
+    pass
+
+class UserCreate(UserBase):
+    password: str
+    email: str
 
 class Hasher():
     def verify_password(plain_password, hashed_password):
@@ -14,19 +23,21 @@ class Hasher():
     def get_password_hash(password):
         return pwd_context.hash(password)
 
-class LoginSchema(BaseModel):
-    email: str | None = None
-    password: str | None = None
-
+class LoginSchema(UserBase):
+    email: str
+    password: str
     class Config:
         orm_mode = True
 
-class UserSchema(BaseModel):
-    id: int | None = None
-    email: str | None = None
-    username: str | None = None
-    password: str | None = None
-    token: str | None = None
-
+class UserSchema(UserBase):
+    id: int 
+    email: str 
+    username: str
+    password: str
+    token: str
+    comments: list[Comment] = []
+    posts: list[Post] = []
     class Config:
         orm_mode = True
+
+UserSchema.model_rebuild()

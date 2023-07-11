@@ -1,7 +1,6 @@
 # from __future__ import annotations
-from typing import ForwardRef, Optional
+from typing import Optional
 from pydantic import BaseModel
-
 
 
 class CommentBase(BaseModel):
@@ -9,7 +8,7 @@ class CommentBase(BaseModel):
 
 class CommentCreate(CommentBase):
     content: str
-    user_id: int
+    author_id: int
     post_id: int
 
 class CommentPatch(CommentBase):
@@ -19,5 +18,9 @@ class CommentPatch(CommentBase):
 class Comment(CommentBase):
     id: int
     content: str
-    user_id: int
+    author_id: int
     post_id: int
+    class Config:
+        orm_mode = True
+
+Comment.model_rebuild()

@@ -6,13 +6,18 @@ from config import SECURE_KEY
 from datetime import datetime, timezone
 
 
-def get_user_by_token(db: Session, token: str) -> User :
-    return db.query(User).filter(User.token == token).first()
+class UserController :
 
-def is_password(password: str, user:User) -> bool: 
+    @staticmethod
+    def get_user_by_token(db: Session, token: str) -> User :
+        return db.query(User).filter(User.token == token).first()
+
+    @staticmethod
+    def is_password(password: str, user:User) -> bool: 
     return Hasher.is_valid_password(password, user.password)
 
-def login(db: Session, email: str, password: str) -> str | None:
+    @staticmethod
+    def login(db: Session, email: str, password: str) -> str | None:
     _user = db.query(User).filter(User.email == email).first()
     if not is_password(db, _user):
         return None
@@ -24,37 +29,40 @@ def login(db: Session, email: str, password: str) -> str | None:
         token = generate_token(db, email, password)
     return token
 
-# generate token for existant user
-def generate_token(db: Session, email: str, password: str) -> str | None:
-    _user = db.query(User).filter(User.email == email).first()
-    if not is_password(db, _user):
-        return None
-    token = jwt.encode({ "exp": datetime.now(tz=timezone.utc) }, SECURE_KEY)
-    _user.token = token
-    db.commit()
-    db.refresh(_user)
-    return token
+    # generate token for existant user
+    @staticmethod
+    def generate_token(db: Session, email: str, password: str) -> str | None:
+        _user = db.query(User).filter(User.email == email).first()
+        if not is_password(db, _user):
+            return None
+        token = jwt.encode({ "exp": datetime.now(tz=timezone.utc) }, SECURE_KEY)
+        _user.token = token
+        db.commit()
+        db.refresh(_user)
+        return token
 
-def register(db: Session, user: UserSchema) -> str | None:
-    hashed_password = Hasher.get_password_hash(user.password)
-    regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(.[A-Z|a-z]{2,})+')
-
-    if not re.fullmatch(regex, user.email):
-        return None
+    @staticmethod
+    def register(db: Session, user: UserSchema) -> str | None:
+        hashed_password = Hasher.get_password_hash(user.password)
+        regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(.[A-Z|a-z]{2,})+')
     
-    token = jwt.encode({ "exp": datetime.now(tz=timezone.utc) }, SECURE_KEY)
-    _user = User(
-        username = user.username,
-        password = hashed_password,
-        email = user.email,
-        token = token
-    )
-    db.add(_user)
-    db.commit()
-    db.refresh(_user)
-    return token
+        if not re.fullmatch(regex, user.email):
+            return None
+        
+        token = jwt.encode({ "exp": datetime.now(tz=timezone.utc) }, SECURE_KEY)
+        _user = User(
+            username = user.username,
+            password = hashed_password,
+            email = user.email,
+            token = token
+        )
+        db.add(_user)
+        db.commit()
+        db.refresh(_user)
+        return token
 
-def update_user(db: Session, user:dict, token:str) -> bool :
+    @staticmethod
+    def update_user(db: Session, user:dict, token:str) -> bool :
     _user = get_user_by_token(db, token)
     if _user == None :
         return False
@@ -75,7 +83,8 @@ def update_user(db: Session, user:dict, token:str) -> bool :
     db.refresh(_user)
     return True
 
-def delete_user(db: Session, token:str) :
+    @staticmethod
+    def delete_user(db: Session, token:str) :
     _user = get_user_by_token(db, token)
     db.delete(_user)
     db.commit()

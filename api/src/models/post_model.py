@@ -1,14 +1,16 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
+from sqlalchemy import Column, String, ForeignKey
 from config import Base
+from models.user_model import User
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 
 class Post(Base):
-    __tablename__ = 'post'
+    __tablename__ = 'posts'
 
-    id = Column(Integer, primary_key=True)
+    id: Mapped[int] = mapped_column(primary_key=True, index=True)
     title = Column(String)
     description = Column(String)
     video_url = Column(String)
-    user_id =  Column(Integer)
-    # user_id =  Column(Integer, ForeignKey("user.id"))
-    # user = relationship("User", back_populates="post")
+    author_id: Mapped[int] = mapped_column(ForeignKey("users.id"))
+    author: Mapped[User] = relationship("User", back_populates="posts")
+    
