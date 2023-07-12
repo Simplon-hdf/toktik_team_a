@@ -10,9 +10,6 @@ pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 class Hasher():
-    # def verify_password(plain_password, hashed_password):
-    #     return pwd_context.verify(plain_password, hashed_password)
-    
     def verify_password(user_password, bdd_password):
         algorithme = hashlib.sha256()
         print(algorithme)
@@ -23,8 +20,6 @@ class Hasher():
             return True
         else:
             return False
-
-
 
     def hash_password(password):
         algorithme = hashlib.sha256()
@@ -59,7 +54,6 @@ User.model_rebuild()
 
 class PostBase(BaseModel):
     description:  Optional[str] = None
-
 
 class PostCreate(PostBase):
     title: str

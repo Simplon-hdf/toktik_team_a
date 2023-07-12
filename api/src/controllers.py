@@ -1,10 +1,9 @@
-# import crypt
 from sqlalchemy.orm import Session
 from .models import UserSchema, PostSchema, CommentSchema
 from .dto import Hasher, PostCreate, PostPatch, CommentCreate, CommentPatch, RegisterSchema, User
 from .utils import ControllerUtils
 import re
-from jwt import encode, decode
+from jwt import encode
 from .config import SECURE_KEY
 from datetime import datetime, timezone
 import hashlib
@@ -25,7 +24,6 @@ class UserController :
     @staticmethod
     def login(db: Session, email: str, password: str) -> str | None:
         _user = db.query(UserSchema).filter(UserSchema.email == email).first()
-        
         if _user is not None :
             if not Hasher.verify_password(password, _user.password):
                 return False
@@ -115,16 +113,8 @@ class UserController :
 
     # Delete a user
     @staticmethod
-    def delete_user(db: Session, token:str) :
-        _user = UserController.get_user_by_token(db, token)
-        db.delete(_user)
-        db.commit()
-        return { 'message': "User is deleted" }
-
-    # Login
-    @staticmethod
-    def delete_user(db: Session, token:str) :
-        _user = UserController.get_user_by_token(db, token)
+    def delete_user(db: Session, id: int) :
+        _user = UserController.get_user_by_id(db, id)
         db.delete(_user)
         db.commit()
         return { 'message': "User is deleted" }

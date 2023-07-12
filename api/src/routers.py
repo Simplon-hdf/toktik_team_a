@@ -1,16 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, Body
 from sqlalchemy.orm import Session
-
 from .dto import PostCreate, PostPatch, CommentCreate, CommentPatch, RegisterSchema, RegisterSchemaWithToken
 from .controllers import UserController, PostController, CommentController
-# from .models import UserSchema, PostSchema, CommentSchema
 from .config import get_db
 
 
 
-
 class UserRouter:
-
     router = APIRouter(prefix="/user", tags=["user"])
 
     # Get all
@@ -57,10 +53,14 @@ class UserRouter:
             raise HTTPException(status_code=404, detail="User is not found")
         return user
 
+    # Delete
+    @router.delete("/delete/{id}")
+    def user_delete(id: int, db: Session = Depends(get_db)):
+         return UserController.delete_user(db, id = id)
+
 
 
 class PostRouter:
-
     router = APIRouter(prefix="/post", tags=["post"])
 
     @router.post("/create", response_model=None)
@@ -96,7 +96,6 @@ class PostRouter:
 
 
 class CommentRouter:
-
     router = APIRouter(prefix="/comment", tags=["comment"])
 
     @router.post("/create", response_model=None)
