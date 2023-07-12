@@ -1,7 +1,7 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Request, Body
 from sqlalchemy.orm import Session
 
-from .dto import UserCreate, PostCreate, PostPatch, CommentCreate, CommentPatch
+from .dto import UserBase, PostCreate, PostPatch, CommentCreate, CommentPatch
 from .controllers import UserController, PostController, CommentController
 from .models import UserSchema, PostSchema, CommentSchema
 from .config import get_db
@@ -13,9 +13,25 @@ class UserRouter:
 
     router = APIRouter(prefix="/user", tags=["user"])
 
-    @router.post("/create", response_model=None)
-    def register(user=UserCreate, db: Session = Depends(get_db)):
+    # Get all
+    @router.get("/list", response_model = None)
+    def post_user(db : Session = Depends(get_db)):
+        users = UserController.get_all(db)
+        return users
+
+    # Get by token
+    @router.get("/token", response_model=None)
+    async def post_read(body = Body(...), db: Session = Depends(get_db)):
+        user = UserController.get_user_by_token(db, body["token"])
+        if user is None:
+            raise HTTPException(status_code=404, detail="User is not found")
+        return user
+    
+    # Register
+    @router.post("/create", response_model = None)
+    def register(user = UserBase, db: Session = Depends(get_db)):
         return UserController.register(db=db, user=user)
+
 
 
 

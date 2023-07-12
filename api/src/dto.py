@@ -8,9 +8,6 @@ from .models import CommentSchema, PostSchema, UserSchema
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 class UserBase(BaseModel):
-    pass
-
-class UserCreate(UserBase):
     password: str
     email: str
 
@@ -21,15 +18,17 @@ class Hasher():
     def get_password_hash(password):
         return pwd_context.hash(password)
 
-class LoginSchema(UserBase):
-    email: str
-    password: str
-
-class UserSchema(UserBase):
-    id: int
-    email: str
+class RegisterSchema(UserBase):
     username: str
-    password: str
+
+# class UserPost(UserBase):
+#     username: str
+
+class User(UserBase):
+    id: int
+    # email: str
+    # username: str
+    # password: str
     token: str
     comments: list[CommentSchema] = []
     posts: list[PostSchema] = []
@@ -37,7 +36,7 @@ class UserSchema(UserBase):
         from_attributes = True
         arbitrary_types_allowed = True
 
-UserSchema.model_rebuild()
+User.model_rebuild()
 
 
 
