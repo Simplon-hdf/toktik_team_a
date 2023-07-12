@@ -1,10 +1,7 @@
 from pydantic import BaseModel, ConfigDict
-from passlib.context import CryptContext
 from typing import Optional
-import hashlib
 
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 
@@ -58,30 +55,6 @@ Post.model_rebuild()
 
 
 
-class Hasher():
-    # def verify_password(plain_password, hashed_password):
-    #     return pwd_context.verify(plain_password, hashed_password)
-    
-    def verify_password(user_password, bdd_password):
-        algorithme = hashlib.sha256()
-        print(algorithme)
-        algorithme.update(user_password.encode())
-        print(algorithme)
-
-        if algorithme.hexdigest() == bdd_password:
-            return True
-        else:
-            return False
-
-
-
-    def hash_password(password):
-        algorithme = hashlib.sha256()
-        algorithme.update(password.encode())
-        return algorithme.hexdigest()
-
-    def get_password_hash(password):
-        return pwd_context.hash(password)
 
 class UserBase(BaseModel):
     password: str

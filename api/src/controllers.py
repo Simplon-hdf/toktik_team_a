@@ -7,8 +7,8 @@ from jwt import encode, decode
 import hashlib
 
 from .models import UserSchema, PostSchema, CommentSchema
-from .dto import Hasher, PostCreate, PostPatch, CommentCreate, CommentPatch, RegisterSchema, User
-from .utils import ControllerUtils
+from .dto import PostCreate, PostPatch, CommentCreate, CommentPatch, RegisterSchema, User
+from .utils import ControllerUtils, Hasher
 from .config import SECURE_KEY
 
 
@@ -27,9 +27,11 @@ class UserController :
     @staticmethod
     def login(db: Session, email: str, password: str) -> str | None:
         _user = db.query(UserSchema).filter(UserSchema.email == email).first()
-
+        if _user == None:
+            return None
+        
         if not Hasher.verify_password(password, _user.password):
-            return False
+            return None
         else :
             return UserController.generate_token(db, email, password)
 
