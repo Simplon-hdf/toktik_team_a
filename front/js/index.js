@@ -26,9 +26,10 @@ function displayComments(json)
     });
 }
 
-async function fetchAndUpdate(id)
+async function fetchAndUpdate(id=null)
 {
-    const response = await fetch("http://localhost:8000/post/" + id);
+    const rest_url = id == null ? "http://localhost:8000/post/random" : "http://localhost:8000/post/" + id
+    const response = await fetch(rest_url)
 
     if (response.ok) {
         const post = await response.json();
@@ -50,4 +51,9 @@ async function fetchAndUpdate(id)
 function changeVideo(delta)
 {
     fetchAndUpdate(currentPostId + delta)
+}
+
+function randomVideo()
+{
+    fetchAndUpdate(null)
 }

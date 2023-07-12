@@ -48,6 +48,10 @@ class PostRouter:
         posts = PostController.get_all(db, skip=skip, limit=limit)
         return posts
 
+    @router.get("/random", response_model=Post)
+    def post_random(db: Session = Depends(get_db)):
+        return PostController.get_random(db)
+
     @router.get("/{post_id}", response_model=Post)
     def post_read(post_id: int, db: Session = Depends(get_db)):
         post = PostController.get(db, post_id=post_id)

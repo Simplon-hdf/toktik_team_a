@@ -1,10 +1,12 @@
 from sqlalchemy.orm import Session
+from sqlalchemy.sql import func
+import jwt, re
+from datetime import datetime, timezone
+
 from .models import UserSchema, PostSchema, CommentSchema
 from .dto import Hasher, UserBase, PostCreate, PostPatch, CommentCreate, CommentPatch, RegisterSchema, User
 from .utils import ControllerUtils
-import jwt, re
 from .config import SECURE_KEY
-from datetime import datetime, timezone
 
 
 
@@ -103,6 +105,10 @@ class PostController:
     @staticmethod
     def get(db: Session, post_id: int):
         return db.query(PostSchema).filter(PostSchema.id == post_id).first()
+    
+    @staticmethod
+    def get_random(db: Session):
+        return db.query(PostSchema).order_by(func.random()).first()
 
     @staticmethod
     def get_all(db: Session, skip: int = 0, limit: int = 100):
