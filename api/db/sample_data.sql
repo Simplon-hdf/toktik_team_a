@@ -1,0 +1,31 @@
+INSERT INTO "users" VALUES (DEFAULT, 'test1', 'test1@example.com', 'test1', 'token1');
+INSERT INTO "users" VALUES (DEFAULT, 'test2', 'test2@example.com', 'test2', 'token2');
+INSERT INTO "users" VALUES (DEFAULT, 'test3', 'test3@example.com', 'test3', 'token3');
+INSERT INTO "users" VALUES (DEFAULT, 'test4', 'test4@example.com', 'test4', 'token4');
+INSERT INTO "users" VALUES (DEFAULT, 'test5', 'test5@example.com', 'test5', 'token5');
+
+INSERT INTO "posts" VALUES (DEFAULT, 'test_post_please_ignore', NULL, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 1);
+INSERT INTO "posts" VALUES (DEFAULT, 'test_post_please_ignore', NULL, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 1);
+INSERT INTO "posts" VALUES (DEFAULT, 'test_post_please_ignore', NULL, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 1);
+INSERT INTO "posts" VALUES (DEFAULT, 'test_post_please_ignore', NULL, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 1);
+INSERT INTO "posts" VALUES (DEFAULT, 'test_post_please_ignore', NULL, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 2);
+INSERT INTO "posts" VALUES (DEFAULT, 'test_post_please_ignore', NULL, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 2);
+INSERT INTO "posts" VALUES (DEFAULT, 'test_post_please_ignore', NULL, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 2);
+INSERT INTO "posts" VALUES (DEFAULT, 'test_post_please_ignore', NULL, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 3);
+INSERT INTO "posts" VALUES (DEFAULT, 'test_post_please_ignore', NULL, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 4);
+INSERT INTO "posts" VALUES (DEFAULT, 'test_post_please_ignore', NULL, 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', 5);
+
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 1);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 2, 1);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 3, 1);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 4, 1);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 5, 1);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 2);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 3);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 3);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 3);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 6);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 7);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 8);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 9);
+INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 10);

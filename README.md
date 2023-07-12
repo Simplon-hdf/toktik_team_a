@@ -41,7 +41,7 @@ Basic Tiktok clone
 conda create --name toktik
 conda activate toktik
 conda install python=3.10 pip
-pip install uvicorn fastapi SQLAlchemy
+pip install uvicorn fastapi SQLAlchemy jwt passlib psycopg2
 ```
 
 
