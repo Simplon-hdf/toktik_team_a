@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, Request, Body
 from sqlalchemy.orm import Session
 
-from .dto import UserBase, PostCreate, PostPatch, CommentCreate, CommentPatch
+from .dto import PostCreate, PostPatch, CommentCreate, CommentPatch, RegisterSchema, RegisterSchemaWithToken
 from .controllers import UserController, PostController, CommentController
-from .models import UserSchema, PostSchema, CommentSchema
+# from .models import UserSchema, PostSchema, CommentSchema
 from .config import get_db
 
 
@@ -18,9 +18,17 @@ class UserRouter:
     def post_user(db : Session = Depends(get_db)):
         users = UserController.get_all(db)
         return users
+    
+    # Get by ID
+    @router.get("/{id}", response_model=None)
+    def user_read(id: int, db: Session = Depends(get_db)):
+        user = UserController.get_user_by_id(db, id = id)
+        if user is None:
+            raise HTTPException(status_code=404, detail="User not found")
+        return user
 
     # Get by token
-    @router.get("/token", response_model=None)
+    @router.get("/token", response_model = None)
     async def post_read(body = Body(...), db: Session = Depends(get_db)):
         user = UserController.get_user_by_token(db, body["token"])
         if user is None:
@@ -29,9 +37,25 @@ class UserRouter:
     
     # Register
     @router.post("/create", response_model = None)
-    def register(user = UserBase, db: Session = Depends(get_db)):
-        return UserController.register(db=db, user=user)
+    def register(user: RegisterSchema, db: Session = Depends(get_db)):
+        return UserController.register(db = db, user = user)
+    
+    # Update
+    @router.patch("/{id}", response_model = None)
+    def user_patch(id: int, body: RegisterSchemaWithToken, db: Session = Depends(get_db)):
+        user = UserController.get_user_by_id(db, id = id)
+        if user is None:
+            raise HTTPException(status_code=404, detail="User not found")
+        return UserController.patch(db=db, user=user, body=body)
 
+    # Login
+    @router.post("/login", response_model = None)
+    def user_email(body = Body(...), db: Session = Depends(get_db)):
+        user = UserController.login(db, body["email"], body["password"])
+        
+        if user is None :
+            raise HTTPException(status_code=404, detail="User is not found")
+        return user
 
 
 

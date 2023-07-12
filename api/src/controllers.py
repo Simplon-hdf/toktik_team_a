@@ -1,62 +1,76 @@
+# import crypt
 from sqlalchemy.orm import Session
 from .models import UserSchema, PostSchema, CommentSchema
-from .dto import Hasher, UserBase, PostCreate, PostPatch, CommentCreate, CommentPatch, RegisterSchema, User
+from .dto import Hasher, PostCreate, PostPatch, CommentCreate, CommentPatch, RegisterSchema, User
 from .utils import ControllerUtils
-import jwt, re
+import re
+from jwt import encode, decode
 from .config import SECURE_KEY
 from datetime import datetime, timezone
-
+import hashlib
 
 
 class UserController :
 
     @staticmethod
-    def get_all(db: Session):
-        return db.query(UserSchema).all()
+    def is_password_match(password: str, user:UserSchema) -> bool:
+        algorithme = hashlib.sha256()
+        algorithme.update(password.encode())
 
-    @staticmethod
-    def get_user_by_token(db: Session, token: str) -> UserSchema :
-        return db.query(UserSchema).filter(UserSchema.token == token).first()
-    
-    @staticmethod
-    def is_password(password: str, user:UserSchema) -> bool:
-        return Hasher.is_valid_password(password, user.password)
+        if algorithme.hexdigest() == user.password:
+            return True  # Le mot de passe est valide
+        else:
+            return False  # Le mot de passe est invalide
 
     @staticmethod
     def login(db: Session, email: str, password: str) -> str | None:
         _user = db.query(UserSchema).filter(UserSchema.email == email).first()
-        if not UserController.is_password(db, _user):
-            return None
 
-        token = _user.token
-        try :
-            jwt.decode( token, SECURE_KEY, algorithms = ["HS256"] )
-        except jwt.ExpiredSignatureError:
-            token = UserController.generate_token(db, email, password)
-        return token
+        if not Hasher.verify_password(password, _user.password):
+            return False
+        else :
+            return UserController.generate_token(db, email, password)
 
     # generate token for existant user
     @staticmethod
     def generate_token(db: Session, email: str, password: str) -> str | None:
         _user = db.query(UserSchema).filter(UserSchema.email == email).first()
-        if not UserController.is_password(db, _user):
+        if not UserController.is_password_match(password, _user):
             return None
-        token = jwt.encode({ "exp": datetime.now(tz=timezone.utc) }, SECURE_KEY)
+        token = encode({ "exp": datetime.now(tz=timezone.utc) }, SECURE_KEY, algorithm="HS256")
         _user.token = token
         db.commit()
         db.refresh(_user)
         return token
 
+    # Get all users
+    @staticmethod
+    def get_all(db: Session):
+        return db.query(UserSchema).all()
+
+    # Get by token
+    @staticmethod
+    def get_user_by_token(db: Session, token: str) -> UserSchema :
+        return db.query(UserSchema).filter(UserSchema.token == token).first()
+    
+    # Get by ID
+    @staticmethod
+    def get_user_by_id(db: Session, id: int) -> UserSchema :
+        return db.query(UserSchema).filter(UserSchema.id == id).first()
+    
+    # Create a user
     @staticmethod
     def register(db: Session, user: RegisterSchema) -> str | None:
-        hashed_password = Hasher.get_password_hash(user.password)
+        hashed_password = Hasher.hash_password(user.password)
+
+        # hashed_password = Hasher.get_password_hash(user.password)
         regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(.[A-Z|a-z]{2,})+')
 
         if not re.fullmatch(regex, user.email):
             return None
 
-        token = jwt.encode({ "exp": datetime.now(tz=timezone.utc) }, SECURE_KEY)
-        _user = User(
+        token = encode({ "exp": datetime.now(tz=timezone.utc) }, SECURE_KEY)
+        _user = UserSchema(
             username = user.username,
             password = hashed_password,
             email = user.email,
@@ -67,6 +81,7 @@ class UserController :
         db.refresh(_user)
         return token
 
+    # Full update a user
     @staticmethod
     def update_user(db: Session, user:dict, token:str) -> bool :
         _user = UserController.get_user_by_token(db, token)
@@ -89,6 +104,23 @@ class UserController :
         db.refresh(_user)
         return True
 
+    # Update a user
+    @staticmethod
+    def patch(db: Session, user: UserSchema, body: User):
+        ControllerUtils.patch_entity(user, body)
+        db.commit()
+        db.refresh(user)
+        return user
+
+    # Delete a user
+    @staticmethod
+    def delete_user(db: Session, token:str) :
+        _user = UserController.get_user_by_token(db, token)
+        db.delete(_user)
+        db.commit()
+        return { 'message': "User is deleted" }
+
+    # Login
     @staticmethod
     def delete_user(db: Session, token:str) :
         _user = UserController.get_user_by_token(db, token)
