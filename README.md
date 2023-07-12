@@ -15,6 +15,8 @@ Basic Tiktok clone
 ## Documentation
 
 - `docs/conception` : data models
+- [http://localhost:8000/docs](http://localhost:8000/docs) : auto-generated documentation (*Swagger UI*)
+- [http://localhost:8000/redoc](http://localhost:8000/redoc) : auto-generated documentation (*Redoc*)
 
 
 
@@ -30,6 +32,11 @@ Basic Tiktok clone
 
 - Python
 - [PostgreSQL](https://www.postgresql.org/download/) : Database
+- [uvicorn](https://www.uvicorn.org/) : WebServer
+- [fastapi](https://fastapi.tiangolo.com/) : API Framework
+- [SQLAlchemy](https://www.sqlalchemy.org/) : ORM
+- [psycopg2](https://pypi.org/project/psycopg2/) : PostgreSQL adapter
+- [PyJWT](https://pyjwt.readthedocs.io/en/stable/) / [passlib](https://passlib.readthedocs.io/en/stable/) : Password hashing & token generation
 
 
 
@@ -41,7 +48,7 @@ Basic Tiktok clone
 conda create --name toktik
 conda activate toktik
 conda install python=3.10 pip
-pip install uvicorn fastapi SQLAlchemy PyJWT passlib psycopg2, hashlib
+pip install uvicorn fastapi==0.100.0 SQLAlchemy pyjwt passlib psycopg2 hashlib
 ```
 
 
@@ -52,7 +59,7 @@ pip install uvicorn fastapi SQLAlchemy PyJWT passlib psycopg2, hashlib
 
 ```bash
 conda activate toktik
-uvicorn api.main:app --reload
+uvicorn api.src.main:app --reload
 ```
 
 
@@ -90,14 +97,24 @@ uvicorn api.main:app --reload
 <details>
  <summary>
   <code>GET</code>
+  <code><b>/post/random</b></code>
+  <code>(get a random Post)</code>
+ </summary>
+
+##### Responses
+
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | Post                                                           |
+
+</details>
+
+<details>
+ <summary>
+  <code>GET</code>
   <code><b>/post/list</b></code>
   <code>(get all Posts)</code>
  </summary>
-
-##### Parameters
-
-> | name      |  type     | data type               | description                                                      |
-> |-----------|-----------|-------------------------|------------------------------------------------------------------|
 
 ##### Responses
 
@@ -137,11 +154,6 @@ uvicorn api.main:app --reload
   <code><b>/post/delete/:id</b></code>
   <code>(Delete a Post)</code>
  </summary>
-
-##### Parameters
-
-> | name        |  type     | data type               | description                                                    |
-> |-------------|-----------|-------------------------|----------------------------------------------------------------|
 
 ##### Responses
 
@@ -208,11 +220,6 @@ uvicorn api.main:app --reload
   <code>(get all Comments)</code>
  </summary>
 
-##### Parameters
-
-> | name      |  type     | data type               | description                                                      |
-> |-----------|-----------|-------------------------|------------------------------------------------------------------|
-
 ##### Responses
 
 > | http code     | content-type                      | response                                                       |
@@ -250,11 +257,6 @@ uvicorn api.main:app --reload
   <code><b>/comment/delete/:id</b></code>
   <code>(Delete a Comment)</code>
  </summary>
-
-##### Parameters
-
-> | name        |  type     | data type               | description                                                    |
-> |-------------|-----------|-------------------------|----------------------------------------------------------------|
 
 ##### Responses
 
