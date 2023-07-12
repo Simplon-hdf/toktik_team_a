@@ -1,12 +1,38 @@
 var videoContainer = document.querySelector('.video-container');
-var video = videoContainer.querySelector('video');
+// var video = videoContainer.querySelector('video');
 
-// Lecture automatique des vidéos suivantes
-video.addEventListener('ended', playNextVideo);
+// // Lecture automatique des vidéos suivantes
+// video.addEventListener('ended', playNextVideo);
 
-function playNextVideo() {
-    // Remplacez "video1.mp4" par le chemin de votre prochaine vidéo
-    video.src = "video2.mp4";
-    video.load();
-    video.play();
+// function playNextVideo() {
+//     // Remplacez "video1.mp4" par le chemin de votre prochaine vidéo
+//     video.src = "video2.mp4";
+//     video.load();
+//     video.play();
+// }
+
+currentPostId = 0
+
+async function fetchAndUpdate(id)
+{
+    const response = await fetch("http://localhost:8000/post/" + id);
+
+    if (response.ok) {
+        const post = await response.json();
+        console.log(post);
+        document.getElementById("video-author").innerHTML = post.author_id;
+        document.getElementById("video-title").innerHTML = post.title;
+        document.getElementById("video-description").innerHTML = post.description === null ? "<i>Pas de description</i>" : post.description
+
+        videoUrl = post.video_url.match(/watch\?v\=(.*)/)[1]
+        embedUrl = "https://www.youtube.com/embed/" + videoUrl
+        document.querySelector("#video-container > iframe").src = embedUrl
+
+        currentPostId = post.id
+    }
+}
+
+function changeVideo(delta)
+{
+    fetchAndUpdate(currentPostId + delta)
 }
