@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
 from .models import UserSchema, PostSchema, CommentSchema
-from .dto import Hasher, UserCreate, UserSchema, PostCreate, PostPatch, CommentCreate, CommentPatch
+from .dto import Hasher, UserBase, PostCreate, PostPatch, CommentCreate, CommentPatch, RegisterSchema, User
 from .utils import ControllerUtils
 import jwt, re
 from .config import SECURE_KEY
@@ -11,9 +11,13 @@ from datetime import datetime, timezone
 class UserController :
 
     @staticmethod
+    def get_all(db: Session):
+        return db.query(UserSchema).all()
+
+    @staticmethod
     def get_user_by_token(db: Session, token: str) -> UserSchema :
         return db.query(UserSchema).filter(UserSchema.token == token).first()
-
+    
     @staticmethod
     def is_password(password: str, user:UserSchema) -> bool:
         return Hasher.is_valid_password(password, user.password)
@@ -44,7 +48,7 @@ class UserController :
         return token
 
     @staticmethod
-    def register(db: Session, user: UserCreate) -> str | None:
+    def register(db: Session, user: RegisterSchema) -> str | None:
         hashed_password = Hasher.get_password_hash(user.password)
         regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(.[A-Z|a-z]{2,})+')
 
@@ -52,7 +56,7 @@ class UserController :
             return None
 
         token = jwt.encode({ "exp": datetime.now(tz=timezone.utc) }, SECURE_KEY)
-        _user = UserSchema(
+        _user = User(
             username = user.username,
             password = hashed_password,
             email = user.email,

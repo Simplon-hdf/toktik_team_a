@@ -8,7 +8,7 @@ class UserSchema(Base):
     __tablename__ = 'users'
 
     id: Mapped[int] = mapped_column(primary_key = True, index = True)
-    email = Column(String, unique = True, index = True)
+    email = Column(String, unique = True)
     username = Column(String, unique = True)
     password = Column(String)
     token = Column(String, unique = True)
