@@ -42,17 +42,17 @@ INSERT INTO "posts" VALUES (DEFAULT, 'Have you heard of the high elves?', 'elves
 INSERT INTO "posts" VALUES (DEFAULT, 'Pikachu', 'Fuuuuuuuu', 'https://www.youtube.com/watch?v=WSGV_n6H1n0', 4); -----
 INSERT INTO "posts" VALUES (DEFAULT, 'Whats your source ?', 'MGS:R', 'https://www.youtube.com/watch?v=r7l0Rq9E8MY', 5); -----
 
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 1);
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 2, 1);
+INSERT INTO "comments" VALUES (DEFAULT, 'Did you ever hear the tragedy of Darth Plagueis The Wise? I thought not. It’s not a story the Jedi would tell you. It’s a Sith legend. Darth Plagueis was a Dark Lord of the Sith, so powerful and so wise he could use the Force to influence the midichlorians to create life… He had such a knowledge of the dark side that he could even keep the ones he cared about from dying. The dark side of the Force is a pathway to many abilities some consider to be unnatural. He became so powerful… the only thing he was afraid of was losing his power, which eventually, of course, he did. Unfortunately, he taught his apprentice everything he knew, then his apprentice killed him in his sleep. Ironic. He could save others from death, but not himself.', 1, 1);
+INSERT INTO "comments" VALUES (DEFAULT, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In tincidunt efficitur vehicula. Quisque congue molestie lectus, ac ornare est mollis nec. Donec et nisi consectetur, suscipit tortor et, tristique velit', 2, 1);
 INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 3, 1);
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 4, 1);
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 5, 1);
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 2);
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 3);
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 3);
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 3);
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 6);
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 7);
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 8);
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 9);
-INSERT INTO "comments" VALUES (DEFAULT, 'test_commentary_please_ignore', 1, 10);
+INSERT INTO "comments" VALUES (DEFAULT, 'Azerty', 4, 1);
+INSERT INTO "comments" VALUES (DEFAULT, 'Bla bla', 5, 1);
+INSERT INTO "comments" VALUES (DEFAULT, 'Super vidéo, je mabonne !', 1, 2);
+INSERT INTO "comments" VALUES (DEFAULT, 'Test comment', 1, 3);
+INSERT INTO "comments" VALUES (DEFAULT, 'poiuytrez', 1, 3);
+INSERT INTO "comments" VALUES (DEFAULT, '123456', 1, 3);
+INSERT INTO "comments" VALUES (DEFAULT, 'JOQECDKXKISYQYJIZVUTBCORVZUCGFZNHMZGAVLDTLAIFTYNBLNXCUFQHXFNIJJCRDHWYJVGFIUEJHBU', 1, 6);
+INSERT INTO "comments" VALUES (DEFAULT, 'THCAFYPBTPOSYGJMBIFSNKWSLJLBSYVKTOENNOJHEGLDISPAQLFKBCVZIVSOXCUERDRSYSFXXBOVKQXX', 1, 7);
+INSERT INTO "comments" VALUES (DEFAULT, 'NADSDKEOWITEAIDQYOEGZTYDQCKTWTNPTBKEIFLMUIBRWBHWKXBEIHPTDBNWJIXQHILTFBVGKHQERART', 1, 8);
+INSERT INTO "comments" VALUES (DEFAULT, 'LPKTOTYVXAMJUDKXFAQOMKWTODJXXXXZWGCPPMFCJWBEAVXPFZKTLSKAZWDNHCWGXSMCLXLVKOLLXHYP', 1, 9);
+INSERT INTO "comments" VALUES (DEFAULT, 'ALCTTZAMVJTXUCQOYIAYVXFKOTGSLBCQIGPHCZQHCHAAIHUBAFHWKABVGGABRZQFHCJMASJECUTXVOMZ', 1, 10);
