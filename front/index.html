@@ -13,6 +13,12 @@
 </head>
 
 <body onload="fetchAndUpdate(1)">
+
+    <div id="next-video">
+        <button type="button" class="btn btn-danger" onclick="changeVideo(-1)">Video précédente</button>
+        <button type="button" class="btn btn-warning" onclick="changeVideo(1)">Video suivante</button>
+    </div>
+
     <div id="video-container">
         <iframe
             width="560" height="315"
@@ -36,11 +42,12 @@
         <h5 id="video-author">Auteur</h5>
         <h2 id="video-title">Titre de la vidéo</h2>
         <p id="video-description">Description</p>
-    </div>
-
-    <div id="next-video">
-        <button type="button" class="btn btn-danger" onclick="changeVideo(-1)">Video précédente</button>
-        <button type="button" class="btn btn-warning" onclick="changeVideo(1)">Video suivante</button>
+        <div id="video-comments">
+            <h5>Commentaires :</h5>
+            <ul>
+                
+            </ul>
+        </div>
     </div>
 </body>
 

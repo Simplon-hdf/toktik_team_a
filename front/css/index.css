@@ -14,7 +14,7 @@ body {
     height: 0;
     /* padding-bottom: 56.25%; */ /* Ratio 16:9 pour les vidéos */
     padding-bottom: 315px;
-    background-color: #000;
+    background-color: #222;
     overflow: hidden;
 }
 
@@ -40,4 +40,12 @@ body {
 .video-info p {
     font-size: 14px;
     color: #666;
+}
+
+#next-video {
+    margin: 10px 0px 10px 10px;
+}
+
+#next-video button {
+    margin-right: 5px;
 }

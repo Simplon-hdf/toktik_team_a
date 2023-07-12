@@ -13,6 +13,19 @@ var videoContainer = document.querySelector('.video-container');
 
 currentPostId = 0
 
+function displayComments(json)
+{
+    commentSection = document.querySelector("#video-comments > ul")
+    commentSection.innerText = ""
+
+    json.forEach(element => {
+        var comment = document.createElement('li');
+        comment.innerText = element.author_id + " : " + element.content;
+        // newChildren.push(comment);
+        commentSection.appendChild(comment);
+    });
+}
+
 async function fetchAndUpdate(id)
 {
     const response = await fetch("http://localhost:8000/post/" + id);
@@ -27,6 +40,8 @@ async function fetchAndUpdate(id)
         videoUrl = post.video_url.match(/watch\?v\=(.*)/)[1]
         embedUrl = "https://www.youtube.com/embed/" + videoUrl
         document.querySelector("#video-container > iframe").src = embedUrl
+
+        displayComments(post.comments)
 
         currentPostId = post.id
     }
