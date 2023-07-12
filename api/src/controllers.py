@@ -25,11 +25,12 @@ class UserController :
     @staticmethod
     def login(db: Session, email: str, password: str) -> str | None:
         _user = db.query(UserSchema).filter(UserSchema.email == email).first()
-
-        if not Hasher.verify_password(password, _user.password):
-            return False
-        else :
-            return UserController.generate_token(db, email, password)
+        
+        if _user is not None :
+            if not Hasher.verify_password(password, _user.password):
+                return False
+            else :
+                return UserController.generate_token(db, email, password)
 
     # generate token for existant user
     @staticmethod
