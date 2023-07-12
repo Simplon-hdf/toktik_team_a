@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from .dto import UserBase, PostCreate, PostPatch, CommentCreate, CommentPatch
 from .controllers import UserController, PostController, CommentController
-from .models import UserSchema, PostSchema, CommentSchema
+from .dto import User, Post, Comment
 from .config import get_db
 
 
@@ -14,7 +14,7 @@ class UserRouter:
     router = APIRouter(prefix="/user", tags=["user"])
 
     # Get all
-    @router.get("/list", response_model = None)
+    @router.get("/list", response_model=list[User])
     def post_user(db : Session = Depends(get_db)):
         users = UserController.get_all(db)
         return users
@@ -28,7 +28,7 @@ class UserRouter:
         return user
     
     # Register
-    @router.post("/create", response_model = None)
+    @router.post("/create", response_model=User)
     def register(user = UserBase, db: Session = Depends(get_db)):
         return UserController.register(db=db, user=user)
 
@@ -39,16 +39,16 @@ class PostRouter:
 
     router = APIRouter(prefix="/post", tags=["post"])
 
-    @router.post("/create", response_model=None)
+    @router.post("/create", response_model=Post)
     def post_create(post: PostCreate, db: Session = Depends(get_db)):
         return PostController.create(db=db, post=post)
 
-    @router.get("/list", response_model=None)
+    @router.get("/list", response_model=list[Post])
     def post_list(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
         posts = PostController.get_all(db, skip=skip, limit=limit)
         return posts
 
-    @router.get("/{post_id}", response_model=None)
+    @router.get("/{post_id}", response_model=Post)
     def post_read(post_id: int, db: Session = Depends(get_db)):
         post = PostController.get(db, post_id=post_id)
         if post is None:
@@ -62,7 +62,7 @@ class PostRouter:
             raise HTTPException(status_code=404, detail="Post not found")
         return PostController.delete(db=db, post=post)
 
-    @router.patch("/{post_id}", response_model=None)
+    @router.patch("/{post_id}", response_model=Post)
     def post_patch(post_id: int, body: PostPatch, db: Session = Depends(get_db)):
         post = PostController.get(db, post_id=post_id)
         if post is None:
@@ -75,16 +75,16 @@ class CommentRouter:
 
     router = APIRouter(prefix="/comment", tags=["comment"])
 
-    @router.post("/create", response_model=None)
+    @router.post("/create", response_model=Comment)
     def comment_create(comment: CommentCreate, db: Session = Depends(get_db)):
         return CommentController.create(db=db, comment=comment)
 
-    @router.get("/list", response_model=None)
+    @router.get("/list", response_model=list[Comment])
     def comment_list(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
         comments = CommentController.get_all(db, skip=skip, limit=limit)
         return comments
 
-    @router.get("/{comment_id}", response_model=None)
+    @router.get("/{comment_id}", response_model=Comment)
     def comment_read(comment_id: int, db: Session = Depends(get_db)):
         comment = CommentController.get(db, comment_id=comment_id)
         if comment is None:
@@ -98,7 +98,7 @@ class CommentRouter:
             raise HTTPException(status_code=404, detail="Comment not found")
         return CommentController.delete(db=db, comment=comment)
 
-    @router.patch("/{comment_id}", response_model=None)
+    @router.patch("/{comment_id}", response_model=Comment)
     def comment_patch(comment_id: int, body: CommentPatch, db: Session = Depends(get_db)):
         comment = CommentController.get(db, comment_id=comment_id)
         if comment is None:
