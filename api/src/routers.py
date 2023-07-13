@@ -33,7 +33,7 @@ class UserRouter:
         return user
 
     # Register
-    @router.post("/create", response_model=User)
+    @router.post("/create", response_model=str)
     def register(user: RegisterSchema, db: Session = Depends(get_db)):
         return UserController.register(db=db, user=user)
 
