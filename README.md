@@ -10,9 +10,9 @@ Basic Tiktok clone
 
 
 
-<br><hr>
+<br><br><br>
 
-## Documentation
+# Documentation
 
 - `docs/conception` : data models
 - [http://localhost:8000/docs](http://localhost:8000/docs) : auto-generated documentation (*Swagger UI*)
@@ -22,12 +22,9 @@ Basic Tiktok clone
 
 
 
-<br><hr>
+<br><br><br>
 
-## API
-
-
-
+# API
 ### Dependencies
 
 - Python
@@ -40,8 +37,6 @@ Basic Tiktok clone
 
 
 
-<br>
-
 ### Install
 
 ```bash
@@ -52,8 +47,6 @@ pip install uvicorn fastapi==0.100.0 SQLAlchemy pyjwt passlib psycopg2 hashlib
 ```
 
 
-
-<br>
 
 ### Run [http://localhost:8000/](http://localhost:8000/)
 
@@ -70,7 +63,159 @@ uvicorn api.src.main:app --reload
 
 <br>
 
-**Post**
+- **User**
+
+<details>
+ <summary>
+  <code>GET</code>
+  <code><b>/user/:id</b></code>
+  <code>(get 1 User)</code>
+ </summary>
+
+##### Parameters
+
+> | name      |  type     | data type               | description                                                      |
+> |-----------|-----------|-------------------------|------------------------------------------------------------------|
+> | id        |  required | int                     | user_id                                                          |
+
+##### Responses
+
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | User                                                           |
+> | `404`         | `application/json`                | User does not exist                                            |
+
+</details>
+
+<details>
+ <summary>
+  <code>POST</code>
+  <code><b>/user/register</b></code>
+  <code>(get an auth token)</code>
+ </summary>
+
+ ##### Parameters
+
+> | name        |  type     | data type               | description                                                    |
+> |-------------|-----------|-------------------------|----------------------------------------------------------------|
+> | username    | required  | str                     | Username                                                       |
+> | email       | required  | str                     | Valid email adress                                             |
+> | password    | required  | str                     | Password                                                       |
+
+##### Responses
+
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | ""\[token\]                                                    |
+
+</details>
+
+<details>
+ <summary>
+  <code>DELETE</code>
+  <code><b>/user/delete/:id</b></code>
+  <code>(Delete a User)</code>
+ </summary>
+
+##### Responses
+
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | `User`                                                         |
+> | `404`         | `application/json`                | User does not exist                                            |
+
+</details>
+
+<details>
+ <summary>
+  <code>GET</code>
+  <code><b>/user/token</b></code>
+  <code>(get 1 User, by their token)</code>
+ </summary>
+
+##### Parameters
+
+> | name      |  type     | data type               | description                                                      |
+> |-----------|-----------|-------------------------|------------------------------------------------------------------|
+> | token     |  required | str                     | User token                                                       |
+
+##### Responses
+
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | User                                                           |
+> | `404`         | `application/json`                | User does not exist                                            |
+
+</details>
+
+<details>
+ <summary>
+  <code>GET</code>
+  <code><b>/user/list</b></code>
+  <code>(get all Users)</code>
+ </summary>
+
+##### Responses
+
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | `User`                                                         |
+
+</details>
+
+<details>
+ <summary>
+  <code>POST</code>
+  <code><b>/user/login</b></code>
+  <code>(login)</code>
+ </summary>
+
+##### Parameters
+
+> | name        |  type     | data type               | description                                                    |
+> |-------------|-----------|-------------------------|----------------------------------------------------------------|
+> | email       | required  | str                     | Email                                                          |
+> | password    | required  | str                     | Password                                                       |
+
+##### Responses
+
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | `User`                                                         |
+
+</details>
+
+<details>
+ <summary>
+  <code>PATCH</code>
+  <code><b>/user/:id</b></code>
+  <code>(Partially update an existing User)</code>
+ </summary>
+
+##### Parameters
+
+> | name        |  type     | data type               | description                                                    |
+> |-------------|-----------|-------------------------|----------------------------------------------------------------|
+> | username    | optional  | str                     | Username                                                       |
+> | email       | optional  | str                     | Email                                                          |
+> | password    | optional  | str                     | Password                                                       |
+> | token       | optional  | str                     | Token                                                          |
+
+##### Responses
+
+> | http code     | content-type                      | response                                                       |
+> |---------------|-----------------------------------|----------------------------------------------------------------|
+> | `200`         | `application/json`                | `User`                                                         |
+> | `404`         | `application/json`                | User does not exist                                            |
+
+</details>
+
+
+
+
+<br>
+
+- **Post**
 
 <details>
  <summary>
@@ -189,7 +334,9 @@ uvicorn api.src.main:app --reload
 
 
 
-**Comment**
+<br>
+
+- **Comment**
 
 <details>
  <summary>
@@ -293,36 +440,19 @@ uvicorn api.src.main:app --reload
 
 
 
-<br><hr>
+<br><br><br>
 
-## Client
+# Client
 
 
 
 ### Dependencies
 
-- a
-- b
-
-
-
-<br>
-
-### Install
-
-```bash
-[commands]
-```
-
-
-
-<br>
+- [Bootstrap](https://getbootstrap.com/)
 
 ### Run
 
-```bash
-[commands]
-```
+Just open `index.html` and you're good to go
 
 
 
