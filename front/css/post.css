@@ -2,15 +2,15 @@
 
 html,
 body {
-    height: 100%
+    height: 100%;
+    background: rgb(74, 74, 74);
 }
 
-body {
+body>#page {
     display: grid;
-   place-items: center;
+    align-items: center;
     font-family: 'Manrope', sans-serif;
-   background: rgb(74, 74, 74);
-    
+    background: rgb(74, 74, 74);
 }
 
 .card {
@@ -27,16 +27,16 @@ body {
     -moz-box-shadow: 0px 0px 5px 0px rgba(212, 182, 212, 1)
 }
 
-.comment-box{
-    
-    padding:5px;
+.comment-box {
+
+    padding: 5px;
 }
 
 
 
-.comment-area textarea{
-   resize: none; 
-        border: 1px solid #ad9f9f;
+.comment-area textarea {
+    resize: none;
+    border: 1px solid #ad9f9f;
 }
 
 
@@ -62,11 +62,11 @@ body {
 
 
 .rating {
- display: flex;
-        margin-top: -10px;
+    display: flex;
+    margin-top: -10px;
     flex-direction: row-reverse;
     margin-left: -4px;
-        float: left;
+    float: left;
 }
 
 .rating>input {
@@ -74,7 +74,7 @@ body {
 }
 
 .rating>label {
-        position: relative;
+    position: relative;
     width: 19px;
     font-size: 25px;
     color: #ffa200;

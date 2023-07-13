@@ -10,37 +10,72 @@
     <link rel="stylesheet" href="./css/auth.css">
 </head>
 
-<body>
-    <div class="container">
-        <h2 class="text-center my-5">Connexion / Inscription</h2>
+<body onload="bodyLoad()">
 
-        <form id="loginForm" class="wrapper">
-            <div class="logo">
-                <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" alt="">
+
+
+    <div id="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="index.html">Accueil</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="post.html">Créer un post</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="auth.html">Login</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+            <div class="container-fluid">
+                <form class="d-flex" role="search" id="header_search">
+                    <input id="search_id" class="form-control me-2" type="search" placeholder="Search"
+                        aria-label="ID du post">
+                    <button class="btn btn-outline-success" type="submit">Rechercher</button>
+                </form>
+            </div>
+        </nav>
+    </div>
 
-            <div class="text-center mt-4 name"> TOKTIK </div>
 
-            <form class="p-3 mt-3">
-                
-                <div class="form-field d-flex align-items-center">
-                    <input type="text" name="username" id="username" placeholder="Username">
-                </div>
-                
-                <div class="form-field d-flex align-items-center">
-                    <input type="text" name="email" id="email" placeholder="Email">
+    <div id=="page">
+        <div class="container">
+            <h2 class="text-center my-5">Connexion / Inscription</h2>
+
+            <form id="loginForm" class="wrapper">
+                <div class="logo">
+                    <img src="https://www.freepnglogos.com/uploads/twitter-logo-png/twitter-bird-symbols-png-logo-0.png" alt="">
                 </div>
 
-                <div class="form-field d-flex align-items-center">
-                    <input type="password" name="password" id="password" placeholder="Password">
-                </div>
-                <button class="btn mt-3">Valider</button>
+                <div class="text-center mt-4 name"> TOKTIK </div>
+
+                <form class="p-3 mt-3">
+
+                    <div class="form-field d-flex align-items-center">
+                        <input type="text" name="username" id="username" placeholder="Username">
+                    </div>
+
+                    <div class="form-field d-flex align-items-center">
+                        <input type="text" name="email" id="email" placeholder="Email">
+                    </div>
+
+                    <div class="form-field d-flex align-items-center">
+                        <input type="password" name="password" id="password" placeholder="Password">
+                    </div>
+                    <button class="btn mt-3">Valider</button>
+                </form>
+
+                <!-- <div class="text-center fs-6">
+                    <a href="#">Mots de passe oublié ?</a> or <a href="#">Enregistrez-vous</a>
+                </div> -->
             </form>
-
-            <!-- <div class="text-center fs-6">
-                <a href="#">Mots de passe oublié ?</a> or <a href="#">Enregistrez-vous</a>
-            </div> -->
-        </form>
+        </div>
     </div>
 
     <script src="./js/auth.js"></script>
