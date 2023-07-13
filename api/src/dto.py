@@ -5,8 +5,6 @@ from typing import Optional
 
 
 
-
-
 class CommentBase(BaseModel):
     pass
 

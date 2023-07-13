@@ -7,9 +7,7 @@ from .config import get_db
 
 
 
-
 class UserRouter:
-
     router = APIRouter(prefix="/user", tags=["user"])
 
     # Get all
@@ -17,7 +15,7 @@ class UserRouter:
     def post_user(db : Session = Depends(get_db)):
         users = UserController.get_all(db)
         return users
-    
+
     # Get by ID
     @router.get("/{id}", response_model=User)
     def user_read(id: int, db: Session = Depends(get_db)):
@@ -33,12 +31,12 @@ class UserRouter:
         if user is None:
             raise HTTPException(status_code=404, detail="User is not found")
         return user
-    
+
     # Register
     @router.post("/create", response_model=User)
     def register(user: RegisterSchema, db: Session = Depends(get_db)):
         return UserController.register(db=db, user=user)
-    
+
     # Update
     @router.patch("/{id}", response_model=User)
     def user_patch(id: int, body: RegisterSchemaWithToken, db: Session = Depends(get_db)):
@@ -55,10 +53,14 @@ class UserRouter:
             raise HTTPException(status_code=404, detail="User is not found")
         return user
 
+    # Delete
+    @router.delete("/delete/{id}")
+    def user_delete(id: int, db: Session = Depends(get_db)):
+         return UserController.delete_user(db, id = id)
+
 
 
 class PostRouter:
-
     router = APIRouter(prefix="/post", tags=["post"])
 
     @router.post("/create", response_model=Post)
@@ -98,7 +100,6 @@ class PostRouter:
 
 
 class CommentRouter:
-
     router = APIRouter(prefix="/comment", tags=["comment"])
 
     @router.post("/create", response_model=Comment)

@@ -1,9 +1,10 @@
-# import crypt
 from sqlalchemy.orm import Session
 from sqlalchemy.sql import func
 from datetime import datetime, timezone
 import re
-from jwt import encode, decode
+from jwt import encode
+from .config import SECURE_KEY
+from datetime import datetime, timezone
 import hashlib
 
 from .models import UserSchema, PostSchema, CommentSchema
@@ -29,7 +30,7 @@ class UserController :
         _user = db.query(UserSchema).filter(UserSchema.email == email).first()
         if _user == None:
             return None
-        
+
         if not Hasher.verify_password(password, _user.password):
             return None
         else :
@@ -56,12 +57,12 @@ class UserController :
     @staticmethod
     def get_user_by_token(db: Session, token: str) -> UserSchema :
         return db.query(UserSchema).filter(UserSchema.token == token).first()
-    
+
     # Get by ID
     @staticmethod
     def get_user_by_id(db: Session, id: int) -> UserSchema :
         return db.query(UserSchema).filter(UserSchema.id == id).first()
-    
+
     # Create a user
     @staticmethod
     def register(db: Session, user: RegisterSchema) -> str | None:
@@ -118,16 +119,8 @@ class UserController :
 
     # Delete a user
     @staticmethod
-    def delete_user(db: Session, token:str) :
-        _user = UserController.get_user_by_token(db, token)
-        db.delete(_user)
-        db.commit()
-        return { 'message': "User is deleted" }
-
-    # Login
-    @staticmethod
-    def delete_user(db: Session, token:str) :
-        _user = UserController.get_user_by_token(db, token)
+    def delete_user(db: Session, id: int) :
+        _user = UserController.get_user_by_id(db, id)
         db.delete(_user)
         db.commit()
         return { 'message': "User is deleted" }
@@ -139,7 +132,7 @@ class PostController:
     @staticmethod
     def get(db: Session, post_id: int):
         return db.query(PostSchema).filter(PostSchema.id == post_id).first()
-    
+
     @staticmethod
     def get_random(db: Session):
         return db.query(PostSchema).order_by(func.random()).first()
