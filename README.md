@@ -48,6 +48,14 @@ pip install uvicorn fastapi==0.100.0 SQLAlchemy pyjwt passlib psycopg2 hashlib
 
 
 
+### Database setup
+
+- `api/db/schema.sql` : DB structure dump
+- `api/db/sample_data.sql` : Sample Users, Posts & Comments
+- Copy `api/src/config.py.example` as `api/src/config.py`, and setup the database connection
+
+
+
 ### Run [http://localhost:8000/](http://localhost:8000/)
 
 ```bash
