@@ -47,37 +47,38 @@
     </div>
 
 
+    <div id="page">
+        <div id="next-video">
+            <button type="button" class="btn btn-danger" onclick="changeVideo(-1)">Video précédente</button>
+            <button type="button" class="btn btn-warning" onclick="changeVideo(1)">Video suivante</button>
+            <button type="button" class="btn btn-primary" onclick="randomVideo()">Video aléatoire</button>
+        </div>
 
-    <div id="next-video">
-        <button type="button" class="btn btn-danger" onclick="changeVideo(-1)">Video précédente</button>
-        <button type="button" class="btn btn-warning" onclick="changeVideo(1)">Video suivante</button>
-        <button type="button" class="btn btn-primary" onclick="randomVideo()">Video aléatoire</button>
-    </div>
+        <div id="video-container">
+            <iframe width="560" height="315" src="" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+            <!-- <video
+                width="600"
+                height="600"
+                autoplay
+                loop
+                controls>
+                <source src="test.mp4" type="video/mp4">
+            </video> -->
+        </div>
 
-    <div id="video-container">
-        <iframe width="560" height="315" src="" title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen>
-        </iframe>
-        <!-- <video
-            width="600"
-            height="600"
-            autoplay
-            loop
-            controls>
-            <source src="test.mp4" type="video/mp4">
-        </video> -->
-    </div>
+        <div id="video-info">
+            <h5 id="video-author">Auteur</h5>
+            <h2 id="video-title">Titre de la vidéo</h2>
+            <p id="video-description">Description</p>
+            <div id="video-comments">
+                <h5>Commentaires :</h5>
+                <ul>
 
-    <div id="video-info">
-        <h5 id="video-author">Auteur</h5>
-        <h2 id="video-title">Titre de la vidéo</h2>
-        <p id="video-description">Description</p>
-        <div id="video-comments">
-            <h5>Commentaires :</h5>
-            <ul>
-
-            </ul>
+                </ul>
+            </div>
         </div>
     </div>
 </body>
