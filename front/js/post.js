@@ -15,7 +15,7 @@ function initForm()
 				httpCode = xhr.status
 				if (httpCode == 200) {
 					postId = JSON.parse(xhr.response).id
-					window.location.href = "http://localhost:8000/post/" + postId
+					window.location.href = "./index.html?post="+postId
 				}
 			}
 		}

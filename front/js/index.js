@@ -1,15 +1,7 @@
 var videoContainer = document.querySelector('.video-container');
-// var video = videoContainer.querySelector('video');
-
-// // Lecture automatique des vidéos suivantes
-// video.addEventListener('ended', playNextVideo);
-
-// function playNextVideo() {
-//     // Remplacez "video1.mp4" par le chemin de votre prochaine vidéo
-//     video.src = "video2.mp4";
-//     video.load();
-//     video.play();
-// }
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const color = urlParams.get('post')
 
 currentPostId = 0
 
@@ -48,12 +40,30 @@ async function fetchAndUpdate(id=null)
     }
 }
 
-function changeVideo(delta)
-{
+function changeVideo(delta) {
     fetchAndUpdate(currentPostId + delta)
 }
 
-function randomVideo()
-{
+function bodyLoad() {
+    const postId = urlParams.get('post')
+    postId === "" ? randomVideo() : fetchAndUpdate(postId)
+}
+
+function randomVideo() {
     fetchAndUpdate(null)
 }
+
+
+
+
+// var video = videoContainer.querySelector('video');
+
+// // Lecture automatique des vidéos suivantes
+// video.addEventListener('ended', playNextVideo);
+
+// function playNextVideo() {
+//     // Remplacez "video1.mp4" par le chemin de votre prochaine vidéo
+//     video.src = "video2.mp4";
+//     video.load();
+//     video.play();
+// }
