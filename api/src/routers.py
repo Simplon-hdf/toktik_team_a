@@ -33,7 +33,7 @@ class UserRouter:
         return user
 
     # Register
-    @router.post("/create", response_model=str)
+    @router.post("/register", response_model=str)
     def register(user: RegisterSchema, db: Session = Depends(get_db)):
         return UserController.register(db=db, user=user)
 
@@ -51,7 +51,7 @@ class UserRouter:
         user = UserController.login(db, body["email"], body["password"])
         
         if user is None :
-            raise HTTPException(status_code=404, detail="User is not found")
+            raise HTTPException(status_code=404, detail="Authentification failed")
         return user
 
     # Delete

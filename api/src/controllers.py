@@ -6,6 +6,7 @@ from jwt import encode
 from .config import SECURE_KEY
 from datetime import datetime, timezone
 import hashlib
+from fastapi import HTTPException
 
 from .models import UserSchema, PostSchema, CommentSchema
 from .dto import PostCreate, PostPatch, CommentCreate, CommentPatch, RegisterSchema, User
@@ -29,9 +30,11 @@ class UserController :
         _user = db.query(UserSchema).filter(UserSchema.email == email).first()
         if _user is not None :
             if not Hasher.verify_password(password, _user.password):
-                return False
+                return None
             else :
                 return UserController.generate_token(db, email, password)
+        else :
+            raise HTTPException(status_code=404, detail="Authentification failed")
 
     # generate token for existant user
     @staticmethod
@@ -62,7 +65,7 @@ class UserController :
 
     # Create a user
     @staticmethod
-    def register(db: Session, user: RegisterSchema) -> str | None:
+    def register(db: Session, user: RegisterSchema) :
         hashed_password = Hasher.hash_password(user.password)
         regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(.[A-Z|a-z]{2,})+')
         if not re.fullmatch(regex, user.email):
