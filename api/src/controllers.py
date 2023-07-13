@@ -64,10 +64,7 @@ class UserController :
     @staticmethod
     def register(db: Session, user: RegisterSchema) -> str | None:
         hashed_password = Hasher.hash_password(user.password)
-
-        # hashed_password = Hasher.get_password_hash(user.password)
         regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(.[A-Z|a-z]{2,})+')
-
         if not re.fullmatch(regex, user.email):
             return { 'message': "Wrong password !" }
 
