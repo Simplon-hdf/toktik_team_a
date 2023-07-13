@@ -1,3 +1,22 @@
+function bodyLoad() {
+    initHeaderSearchForm()
+}
+
+function initHeaderSearchForm()
+{
+	form = document.querySelector("#header_search")
+	form.onsubmit = function(event){
+		var xhr = new XMLHttpRequest();
+
+		searchId = document.getElementById('search_id').value
+		window.location.href = "./index.html?post=" + searchId
+
+		return false;
+	}
+}
+
+
+
 function initForm()
 {
 	form = document.querySelector("#form_post")

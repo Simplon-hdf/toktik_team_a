@@ -1,3 +1,24 @@
+function bodyLoad() {
+    initHeaderSearchForm()
+    const postId = urlParams.get('post')
+    postId === "" ? randomVideo() : fetchAndUpdate(postId)
+}
+
+function initHeaderSearchForm()
+{
+	form = document.querySelector("#header_search")
+	form.onsubmit = function(event){
+		var xhr = new XMLHttpRequest();
+
+		searchId = document.getElementById('search_id').value
+		window.location.href = "./index.html?post=" + searchId
+
+		return false;
+	}
+}
+
+
+
 var videoContainer = document.querySelector('.video-container');
 const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
@@ -44,14 +65,10 @@ function changeVideo(delta) {
     fetchAndUpdate(currentPostId + delta)
 }
 
-function bodyLoad() {
-    const postId = urlParams.get('post')
-    postId === "" ? randomVideo() : fetchAndUpdate(postId)
-}
-
 function randomVideo() {
     fetchAndUpdate(null)
 }
+
 
 
 
