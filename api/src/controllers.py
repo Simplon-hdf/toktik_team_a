@@ -10,7 +10,6 @@ import hashlib
 from .models import UserSchema, PostSchema, CommentSchema
 from .dto import PostCreate, PostPatch, CommentCreate, CommentPatch, RegisterSchema, User
 from .utils import ControllerUtils, Hasher
-from .config import SECURE_KEY
 
 
 class UserController :
