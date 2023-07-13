@@ -67,25 +67,16 @@ class UserController :
     def register(db: Session, user: RegisterSchema) -> str | None:
         hashed_password = Hasher.hash_password(user.password)
         regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(.[A-Z|a-z]{2,})+')
-
         if not re.fullmatch(regex, user.email):
             return None
 
-        print(user, "=================================")
-
         token = encode({ "exp": datetime.now(tz=timezone.utc) }, SECURE_KEY)
-
-        print(user, "=================================")
-
         _user = UserSchema(
             username = user.username,
             password = hashed_password,
             email = user.email,
             token = token
         )
-
-        print(user, "=================================")
-
         db.add(_user)
         db.commit()
         db.refresh(_user)
