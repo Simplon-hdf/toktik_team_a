@@ -23,17 +23,15 @@ class UserController :
             return True  # Le mot de passe est valide
         else:
             return False  # Le mot de passe est invalide
-
+ 
     @staticmethod
     def login(db: Session, email: str, password: str) -> str | None:
         _user = db.query(UserSchema).filter(UserSchema.email == email).first()
-        if _user == None:
-            return None
-
-        if not Hasher.verify_password(password, _user.password):
-            return None
-        else :
-            return UserController.generate_token(db, email, password)
+        if _user is not None :
+            if not Hasher.verify_password(password, _user.password):
+                return False
+            else :
+                return UserController.generate_token(db, email, password)
 
     # generate token for existant user
     @staticmethod
@@ -71,7 +69,7 @@ class UserController :
         regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(.[A-Z|a-z]{2,})+')
 
         if not re.fullmatch(regex, user.email):
-            return None
+            return { 'message': "Wrong password !" }
 
         token = encode({ "exp": datetime.now(tz=timezone.utc) }, SECURE_KEY)
         _user = UserSchema(
